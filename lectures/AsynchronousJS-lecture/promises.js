@@ -7,8 +7,10 @@
 const regularSyncFunctionOne = () => console.log("I am executing first");
 const regularSyncFunctionTwo = () => console.log("I am executing second");
 
-regularSyncFunctionOne();
-regularSyncFunctionTwo();
+const callSnycFunctionsExample = () => {
+  regularSyncFunctionOne();
+  regularSyncFunctionTwo();
+};
 
 /* 
   Javascript can be manipulated to behave in an asynchronous way
@@ -19,39 +21,46 @@ regularSyncFunctionTwo();
 const regularSyncFunction = () =>
   console.log("Executing as a callback function");
 
-const syncCallbackFunction = callback => {
+const syncCallbackFunction = (callback) => {
   callback();
   console.log("Executing outer function");
 };
 
-syncCallbackFunction(regularSyncFunction);
+const callSyncCallbackFunctionExample = () =>
+  syncCallbackFunction(regularSyncFunction);
 
 // Asynchronous Callback Function - execute the rest of the tasks given to it while waiting for another task to finish.
 const asyncCallbackFunction = () =>
   setTimeout(() => console.log("Executing asynchronous callback"), 1000);
 
-const regularSynchroFunction = () => console.log("Executing a regular function call");
+const regularSynchroFunction = () =>
+  console.log("Executing a regular function call");
 
-asyncCallbackFunction();
-regularSynchroFunction();
+const callAsyncCallbackFunctionExample = () => {
+  asyncCallbackFunction();
+  regularSynchroFunction();
+};
 
 /* PROMISES */
 // Resolve & Reject
 const promiseState = false;
 
 const isPromiseKept = new Promise((resolve, reject) => {
-  setTimeout(() => 
-    promiseState ? resolve("Promise resolved") : reject("Promise rejected"), 1000);
+  setTimeout(
+    () =>
+      promiseState ? resolve("Promise resolved") : reject("Promise rejected"),
+    1000
+  );
 });
 const regFunction = () => console.log("Executing a regular function call");
 
 isPromiseKept
-  .then(results => console.log(results))
-  .catch(error => console.error(error));
+  .then((results) => console.log(results))
+  .catch((error) => console.error(error));
 regFunction();
 
 // Promise.all - a promise that takes an array of promises as an input. Then it gets resolved when all the promises get resolved or any one of them gets rejected.
-const promiseOperation = time => {
+const promiseOperation = (time) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       time === 2000
@@ -64,10 +73,10 @@ const promiseOperation = time => {
 const operationTimesList = [1000, 2000, 3000];
 
 // Handling rejections so that Promise.all doesn't stop running once rejected.
-const promises = operationTimesList.map(operationTime =>
-  promiseOperation(operationTime).catch(error => error)
+const promises = operationTimesList.map((operationTime) =>
+  promiseOperation(operationTime).catch((error) => error)
 );
 
 Promise.all(promises)
-  .then(results => console.log(results))
-  .catch(error => console.error(error));
+  .then((results) => console.log(results))
+  .catch((error) => console.error(error));

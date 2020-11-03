@@ -5,8 +5,8 @@ const doSomethingAsync = () => {
     setTimeout(
       () =>
         promiseState
-          ? resolve("Async Promise resolved")
-          : reject("Async Promise rejected"),
+          ? resolve(console.log("Async Promise resolved"))
+          : reject(console.log("Async Promise rejected")),
       3000
     );
   });
@@ -14,7 +14,11 @@ const doSomethingAsync = () => {
 
 // Async ... Await
 const doSomething = async () => {
-  console.log(await doSomethingAsync().catch(error => error));
+  try {
+    await doSomethingAsync();
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 console.log("Before");
